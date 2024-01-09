@@ -3,16 +3,13 @@ import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 
 export default function Register() {
-  // initial state
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [register, setRegister] = useState(false);
 
   const handleSubmit = (e) => {
-    // prevent the form from refreshing the whole page
     e.preventDefault();
 
-    // set configurations
     const configuration = {
       method: "post",
       url: "https://nodejs-mongodb-auth-app.herokuapp.com/register",
@@ -22,7 +19,6 @@ export default function Register() {
       },
     };
 
-    // make the API call
     axios(configuration)
       .then((result) => {
         setRegister(true);
@@ -36,7 +32,6 @@ export default function Register() {
     <>
       <h2>Register</h2>
       <Form onSubmit={(e) => handleSubmit(e)}>
-        {/* email */}
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
@@ -48,7 +43,6 @@ export default function Register() {
           />
         </Form.Group>
 
-        {/* password */}
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
@@ -60,7 +54,6 @@ export default function Register() {
           />
         </Form.Group>
 
-        {/* submit button */}
         <Button
           variant="primary"
           type="submit"
@@ -69,7 +62,6 @@ export default function Register() {
           Register
         </Button>
 
-        {/* display success message */}
         {register ? (
           <p className="text-success">You Are Registered Successfully</p>
         ) : (

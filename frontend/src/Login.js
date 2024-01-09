@@ -11,10 +11,8 @@ export default function Login() {
   const [login, setLogin] = useState(false);
 
   const handleSubmit = (e) => {
-    // prevent the form from refreshing the whole page
     e.preventDefault();
 
-    // set configurations
     const configuration = {
       method: "post",
       url: "https://nodejs-mongodb-auth-app.herokuapp.com/login",
@@ -24,14 +22,11 @@ export default function Login() {
       },
     };
 
-    // make the API call
     axios(configuration)
       .then((result) => {
-        // set the cookie
         cookies.set("TOKEN", result.data.token, {
           path: "/",
         });
-        // redirect user to the auth page
         window.location.href = "/auth";
 
         setLogin(true);
@@ -45,7 +40,6 @@ export default function Login() {
     <>
       <h2>Login</h2>
       <Form onSubmit={(e) => handleSubmit(e)}>
-        {/* email */}
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
@@ -57,7 +51,6 @@ export default function Login() {
           />
         </Form.Group>
 
-        {/* password */}
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
@@ -69,7 +62,6 @@ export default function Login() {
           />
         </Form.Group>
 
-        {/* submit button */}
         <Button
           variant="primary"
           type="submit"
@@ -78,7 +70,6 @@ export default function Login() {
           Login
         </Button>
 
-        {/* display success message */}
         {login ? (
           <p className="text-success">You Are Logged in Successfully</p>
         ) : (

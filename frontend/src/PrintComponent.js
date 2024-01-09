@@ -8,13 +8,11 @@ export default function PrintComponent() {
   return (
     <>
       <div id="print_component">
-        {/* button to trigger printing of target component */}
         <ReactToPrint
           trigger={() => <Button>Print this out!</Button>}
           content={() => componentRef}
         />
 
-        {/* component to be printed */}
         <div style={{ display: "none" }}>
           <ComponentToPrint ref={(el) => (componentRef = el)} />
         </div>
@@ -23,7 +21,6 @@ export default function PrintComponent() {
   );
 }
 
-// component to be printed
 class ComponentToPrint extends React.Component {
   render() {
     return (
