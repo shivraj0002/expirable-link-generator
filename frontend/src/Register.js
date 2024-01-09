@@ -12,7 +12,7 @@ export default function Register() {
 
     const configuration = {
       method: "post",
-      url: "https://nodejs-mongodb-auth-app.herokuapp.com/register",
+      url: `${process.env.REACT_APP_API_KEY}/register`,
       data: {
         email,
         password,

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import PrintComponent from "./PrintComponent";
+import LinkGeberateComponent from "./LinkGenerate";
+
 
 export default function FreeComponent() {
   const [message, setMessage] = useState("");
@@ -8,7 +9,7 @@ export default function FreeComponent() {
   useEffect(() => {
     const configuration = {
       method: "get",
-      url: "https://nodejs-mongodb-auth-app.herokuapp.com/free-endpoint",
+      url: `${process.env.REACT_APP_API_KEY}/free-endpoint`,
     };
 
     axios(configuration)
@@ -26,7 +27,7 @@ export default function FreeComponent() {
 
       <h3 className="text-center text-danger">{message}</h3>
 
-      <PrintComponent />
+      <LinkGeberateComponent />
     </div>
   );
 }

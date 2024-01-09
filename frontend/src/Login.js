@@ -15,7 +15,7 @@ export default function Login() {
 
     const configuration = {
       method: "post",
-      url: "https://nodejs-mongodb-auth-app.herokuapp.com/login",
+      url: `${process.env.REACT_APP_API_KEY}/login`,
       data: {
         email,
         password,

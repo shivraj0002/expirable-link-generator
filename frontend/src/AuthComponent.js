@@ -7,12 +7,13 @@ const cookies = new Cookies();
 const token = cookies.get("TOKEN");
 
 export default function AuthComponent() {
-  const [message, setMessage] = useState("");
+  const [link, setLink] = useState("");
+
 
   useEffect(() => {
     const configuration = {
       method: "get",
-      url: "https://nodejs-mongodb-auth-app.herokuapp.com/auth-endpoint",
+      url: `${process.env.REACT_APP_API_KEY}/auth-endpoint`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -20,7 +21,7 @@ export default function AuthComponent() {
 
     axios(configuration)
       .then((result) => {
-        setMessage(result.data.message);
+        console.log(result)
       })
       .catch((error) => {
         error = new Error();
@@ -32,15 +33,40 @@ export default function AuthComponent() {
     window.location.href = "/";
   }
 
+  const getLink = () =>{
+    const configuration = {
+      method: "get",
+      url: `${process.env.REACT_APP_API_KEY}/get-link`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axios(configuration)
+      .then((result) => {
+        setLink(result.data.link)
+      })
+      .catch((error) => {
+        error = new Error();
+      });
+  }
+
   return (
     <div className="text-center">
-      <h1>Auth Component</h1>
-
-      <h3 className="text-danger">{message}</h3>
-
+      <div className="d-flex justify-content-between">
+      <h1>Home</h1>
       <Button type="submit" variant="danger" onClick={() => logout()}>
         Logout
       </Button>
+      </div>
+      <h3 className="text-danger">{"Genetate link here"}</h3>
+      <div className="d-flex justify-content-center">
+      <Button type="Button" variant="info" onClick={() => {}}>
+        Genetate Link
+      </Button>
+      </div>
+      <div className="d-flex justify-content-center" >
+<p className="text-danger"></p>
+      </div>
     </div>
   );
 }
